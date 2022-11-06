@@ -10,7 +10,8 @@ const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 const initialState = {
 	posts: [],
 	status: 'idle',
-	error: null
+	error: null,
+	temp: null
 }
 
 export const postsSlice = createSlice({
@@ -43,9 +44,12 @@ export const postsSlice = createSlice({
 		},
 		reactionAdded(state, action) {
 			const {postId, reaction} = action.payload
+			console.log(postId, reaction)
 			const existingPost = state.posts.find(post => post.id === postId)
+			console.log(existingPost)
 			if (existingPost) {
-				existingPost.reactions[reaction]++
+
+				state.post.temp = existingPost.reactions[reaction]++
 			}
 		}
 	},
@@ -66,7 +70,7 @@ export const postsSlice = createSlice({
 				}
 				return post
 			})
-			state.posts = state.posts.concate(loadPosts)
+			state.posts = state.posts.concat(loadPosts)
 		}).addCase(fetchPosts.rejected, (state, action) => {
 			state.status = 'failed'
 			state.error = action.error.message
@@ -84,9 +88,9 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 	}
 })
 
-export const selectAllPosts = (state) => state.posts.posts
-export const getPostsStatus = (state) => state.posts.status
-export const getPostsError = (state) => state.posts.error
+export const selectAllPosts = (state) => state.post.posts
+export const getPostsStatus = (state) => state.post.status
+export const getPostsError = (state) => state.post.error
 
 
 export const {addPost, reactionAdded} = postsSlice.actions
