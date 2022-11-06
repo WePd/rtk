@@ -3,15 +3,15 @@ import axios from "axios";
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
-const initialState = [
-	{id: '0', name: 'll'},
-	{id: '1', name: 'hh'},
-	{id: '2', name: 'mm'}
-]
+const initialState = []
 
-const fetchUser = createAsyncThunk('users/fetchUser', async () => {
-		const res = await axios.get(USERS_URL)
-		return res.data
+export const fetchUser = createAsyncThunk('users/fetchUser', async () => {
+		try {
+			const res = await axios.get(USERS_URL)
+			return [...res.data]
+		} catch (error) {
+			return error.message
+		}
 	}
 )
 

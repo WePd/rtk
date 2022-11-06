@@ -3,7 +3,7 @@ import {reactionAdded} from "./postsSlice";
 
 
 const reactionEmoji = {
-	humbsUp: '👍',
+	thumbsUp: '👍',
 	wow: '😮',
 	heart: '❤️',
 	rocket: '🚀',
