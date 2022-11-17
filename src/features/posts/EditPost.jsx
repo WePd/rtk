@@ -27,7 +27,7 @@ const EditPost = (props) => {
 
 	const onContentChanged = (e) => setContent(e.target.value)
 
-	const onAuthorChanged = (e) => setUserId(e.target.value)
+	const onAuthorChanged = (e) => setUserId(Number(e.target.value))
 
 
 	// 保存
